@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>ICS Reader Plugin Example | This is an example Jekyll site to showcase how to read ICS files using a custom Jekyll plugin and expose the details to a liquid variable.</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="ICS Reader Plugin Example" />
+<meta name="author" content="Gourav Khunger" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This is an example Jekyll site to showcase how to read ICS files using a custom Jekyll plugin and expose the details to a liquid variable." />
+<meta property="og:description" content="This is an example Jekyll site to showcase how to read ICS files using a custom Jekyll plugin and expose the details to a liquid variable." />
+<link rel="canonical" href="https://ics-reader-plugin-example.gouravkhunger.me/" />
+<meta property="og:url" content="https://ics-reader-plugin-example.gouravkhunger.me/" />
+<meta property="og:site_name" content="ICS Reader Plugin Example" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="ICS Reader Plugin Example" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"Gourav Khunger"},"description":"This is an example Jekyll site to showcase how to read ICS files using a custom Jekyll plugin and expose the details to a liquid variable.","headline":"ICS Reader Plugin Example","name":"ICS Reader Plugin Example","url":"https://ics-reader-plugin-example.gouravkhunger.me/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ics-reader-plugin-example.gouravkhunger.me/feed.xml" title="ICS Reader Plugin Example" />
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">ICS Reader Plugin Example</a></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <p>This project was built as part of <a href="https://stackoverflow.com/a/75419548/9819031">my answer</a> to a question on StackOverflow. It illustrates how to read <code class="language-plaintext highlighter-rouge">ics</code> files using a custom Jekyll plugin written in Ruby, and expose the extracted data to a liquid variable.</p>
+
+<h2 id="usage">Usage</h2>
+
+<p>Add <a href="https://github.com/icalendar/icalendar"><code class="language-plaintext highlighter-rouge">icalendar</code></a> to your <code class="language-plaintext highlighter-rouge">Gemfile</code> and install it:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle add icalendar
+bundle <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>Get the <a href="https://github.com/gouravkhunger/ics-reader-plugin-example/blob/main/_plugins/calendar_reader.rb"><code class="language-plaintext highlighter-rouge">calendar_reader.rb</code></a> file and place it under the <code class="language-plaintext highlighter-rouge">_plugins</code> directory.</p>
+
+<p>Take an <a href="https://github.com/icalendar/icalendar/blob/main/spec/fixtures/two_events.ics">example ics file</a> <code class="language-plaintext highlighter-rouge">my_calendar.ics</code> and put it into the <code class="language-plaintext highlighter-rouge">_data</code> folder.</p>
+
+<p>Now you can use the plugin filter from your markdown/html:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">events</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"_data/my_calendar.ics"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">read_calendar</span><span class="w"> </span><span class="p">%}</span>
+</code></pre></div></div>
+
+<p>Here <code class="language-plaintext highlighter-rouge">read_calendar</code> is the function defined in <code class="language-plaintext highlighter-rouge">_plugins/calendar_reader.rb</code> and <code class="language-plaintext highlighter-rouge">_data/my_calendar.ics</code> is the file you want to get the data from. The plugin gets the <code class="language-plaintext highlighter-rouge">input</code> file name, reads it and returns a <code class="language-plaintext highlighter-rouge">hash</code> which is stored into the <code class="language-plaintext highlighter-rouge">events</code> variable itself.</p>
+
+<p>You can now use <code class="language-plaintext highlighter-rouge">{{ events }}</code> to access the hash of the data that you return from the function in the plugin file.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// {{ events }} 
+{0=&gt;{"summary"=&gt;"This is a really long summary to test the method of unfolding lines, so I'm just going to make it a whole bunch of lines.", "dtstart"=&gt;#&lt;DateTime: 2005-01-20T17:00:00+00:00 ((2453391j,61200s,0n),+0s,2299161j)&gt;, "dtend"=&gt;#&lt;DateTime: 2005-01-20T18:45:00+00:00 ((2453391j,67500s,0n),+0s,2299161j)&gt;, "description"=&gt;nil}, 1=&gt;{"summary"=&gt;"This is a very short summary.", "dtstart"=&gt;#&lt;DateTime: 2011-01-20T17:00:00+00:00 ((2455582j,61200s,0n),+0s,2299161j)&gt;, "dtend"=&gt;#&lt;DateTime: 2011-01-20T18:45:00+00:00 ((2455582j,67500s,0n),+0s,2299161j)&gt;, "description"=&gt;nil}}
+
+// {{ events[0] }}:
+{"summary"=&gt;"This is a really long summary to test the method of unfolding lines, so I'm just going to make it a whole bunch of lines.", "dtstart"=&gt;#&lt;DateTime: 2005-01-20T17:00:00+00:00 ((2453391j,61200s,0n),+0s,2299161j)&gt;, "dtend"=&gt;#&lt;DateTime: 2005-01-20T18:45:00+00:00 ((2453391j,67500s,0n),+0s,2299161j)&gt;, "description"=&gt;nil}
+
+// events[1]:
+{"summary"=&gt;"This is a very short summary.", "dtstart"=&gt;#&lt;DateTime: 2011-01-20T17:00:00+00:00 ((2455582j,61200s,0n),+0s,2299161j)&gt;, "dtend"=&gt;#&lt;DateTime: 2011-01-20T18:45:00+00:00 ((2455582j,67500s,0n),+0s,2299161j)&gt;, "description"=&gt;nil}
+</code></pre></div></div>
+
+<p>For more information, checkout the <a href="https://github.com/gouravkhunger/ics-reader-plugin-example">project repository</a> at GitHub.</p>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <ul class="contact-list">
+          <li class="p-name"><a href="https://gouravkhunger.me" target="_blank">Gourav Khunger</a></li>
+          <li>gouravkhunger18[at]gmail.com</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>This is an example Jekyll site to showcase how to read ICS files using a custom Jekyll plugin and expose the details to a liquid variable.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li>
+  <a rel="me" href="https://link.gouravkhunger.me/github" target="_blank" title="github">
+    <svg class="svg-icon grey">
+      <use xlink:href="/assets/minima-social-icons.svg#github"></use>
+    </svg>
+  </a>
+</li>
+<li>
+  <a rel="me" href="https://link.gouravkhunger.me/youtube" target="_blank" title="youtube">
+    <svg class="svg-icon grey">
+      <use xlink:href="/assets/minima-social-icons.svg#youtube"></use>
+    </svg>
+  </a>
+</li>
+<li>
+  <a rel="me" href="https://link.gouravkhunger.me/twitter" target="_blank" title="twitter">
+    <svg class="svg-icon grey">
+      <use xlink:href="/assets/minima-social-icons.svg#twitter"></use>
+    </svg>
+  </a>
+</li>
+<li>
+  <a rel="me" href="https://link.gouravkhunger.me/stackoverflow" target="_blank" title="stackoverflow">
+    <svg class="svg-icon grey">
+      <use xlink:href="/assets/minima-social-icons.svg#stackoverflow"></use>
+    </svg>
+  </a>
+</li>
+</ul>
+</div>
+
+  </div>
+
+</footer></body>
+
+</html>
