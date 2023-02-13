@@ -1,0 +1,32 @@
+title: ICS Reader Plugin Example
+description: >-
+  This is an example Jekyll site to showcase how to read ICS files using a
+  custom Jekyll plugin and expose the details to a liquid variable.
+url: "https://ics-reader-plugin-example.gouravkhunger.me"
+baseurl: ""
+
+author:
+  name: Gourav Khunger
+  email: gouravkhunger18[at]gmail.com
+
+theme: minima
+
+minima:
+  social_links:
+    - { platform: github,  user_url: "https://link.gouravkhunger.me/github" }
+    - { platform: youtube, user_url: "https://link.gouravkhunger.me/youtube" }
+    - { platform: twitter, user_url: "https://link.gouravkhunger.me/twitter" }
+    - { platform: stackoverflow, user_url: "https://link.gouravkhunger.me/stackoverflow" }
+
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
