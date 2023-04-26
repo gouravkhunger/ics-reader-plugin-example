@@ -2,7 +2,7 @@
 # Feel free to add content and custom Front Matter to this file.
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
-layout: default
+layout: base
 ---
 
 This project was built as part of [my answer](https://stackoverflow.com/a/75419548/9819031) to a question on StackOverflow. It illustrates how to read `ics` files using a custom Jekyll plugin written in Ruby, and expose the extracted data to a liquid variable.
