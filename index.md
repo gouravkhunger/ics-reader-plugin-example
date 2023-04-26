@@ -37,7 +37,7 @@ You can now use `{% raw %}{{ events }}{% endraw %}` to access the hash of the da
 // {% raw %}{{ events[0] }}{% endraw %}:
 {{ events[0] }}
 
-// {% raw %}events[1]{% endraw %}:
+// {% raw %}{{ events[1] }}{% endraw %}:
 {{ events[1] }}
 ```
 

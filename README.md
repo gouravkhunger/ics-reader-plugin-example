@@ -110,11 +110,11 @@ You can now use `{{ events }}` to access the hash of the data that you return fr
 {0=>{“summary”=>”This is a really long summary to test the method of unfolding lines, so I’m just going to make it a whole bunch of lines.”, “dtstart”=>#<DateTime: 2005-01-20T17:00:00+00:00 ((2453391j,61200s,0n),+0s,2299161j)>, “dtend”=>#<DateTime: 2005-01-20T18:45:00+00:00 ((2453391j,67500s,0n),+0s,2299161j)>, “description”=>nil}, 1=>{“summary”=>”This is a very short summary.”, “dtstart”=>#<DateTime: 2011-01-20T17:00:00+00:00 ((2455582j,61200s,0n),+0s,2299161j)>, “dtend”=>#<DateTime: 2011-01-20T18:45:00+00:00 ((2455582j,67500s,0n),+0s,2299161j)>, “description”=>nil}}
 
 
-// events[0]:
+// {{ events[0] }}
 
 {“summary”=>”This is a really long summary to test the method of unfolding lines, so I’m just going to make it a whole bunch of lines.”, “dtstart”=>#<DateTime: 2005-01-20T17:00:00+00:00 ((2453391j,61200s,0n),+0s,2299161j)>, “dtend”=>#<DateTime: 2005-01-20T18:45:00+00:00 ((2453391j,67500s,0n),+0s,2299161j)>, “description”=>nil} 
 
-// events[1]:
+// {{ events[1] }}
 
 {“summary”=>”This is a very short summary.”, “dtstart”=>#<DateTime: 2011-01-20T17:00:00+00:00 ((2455582j,61200s,0n),+0s,2299161j)>, “dtend”=>#<DateTime: 2011-01-20T18:45:00+00:00 ((2455582j,67500s,0n),+0s,2299161j)>, “description”=>nil}
 ```
